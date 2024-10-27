@@ -466,8 +466,16 @@ class Artifact():
             n_subs = random.choices((3,4), (66,34))[0]
         else:
             n_subs = random.choices((3,4), (8,2))[0]
-    
-        sub_stats = random.choices(possible_substats, weights, k=n_subs)
+
+        sub_stats = []
+        new_sub = None
+        for jk in range(n_subs):
+            if not new_sub is None:
+                idx = possible_substats.index(new_sub)
+                possible_substats.pop(idx)
+                weights.pop(idx)
+            new_sub = random.choices(possible_substats, weights)[0]
+            sub_stats.append(new_sub)
         return main_stat, sub_stats
 
     @classmethod
