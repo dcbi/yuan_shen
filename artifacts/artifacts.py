@@ -392,6 +392,7 @@ def convertArtifactEXP(stars, rank=0):
     base = (1260, 2520, 3780)
     enhanced = CUMULATIVE_EXP_REQUIRED
     exp = base[stars-3] + enhanced[rank]*4/5
+    return exp
 
 class Artifact():
     def __init__(self, art_set, piece, main_stat, sub_stats):
@@ -425,13 +426,13 @@ class Artifact():
             weights = list(SUB_WEIGHT)
             if self.main_stat in possible_substats:
                 idx = possible_substats.index(main_stat)
-                possible_substats.remove(idx)
-                weights.remove(idx)
+                possible_substats.pop(idx)
+                weights.pop(idx)
             for st in self.sub_stats:
                 idx = possible_substats.index(st)
-                possible_substats.remove(idx)
-                weights.remove(idx)
-            new_sub = random.choices(possible_substats, weights)
+                possible_substats.pop(idx)
+                weights.pop(idx)
+            new_sub = random.choices(possible_substats, weights)[0]
             upidx = random.choice((0,1,2,3))
             new_sub_val = SUB_VALUES_BASE[new_sub] * SUB_VALUES_PERCENTAGE[upidx]
             self.sub_stats.append(new_sub)
@@ -451,20 +452,20 @@ class Artifact():
         elif piece == "feather":
             main_stat = "ATK"
         else:
-            main_stat = random.choices(MAIN_STATS[piece], MAIN_DISTRIBUTION[piece])
+            main_stat = random.choices(MAIN_STATS[piece], MAIN_DISTRIBUTION[piece])[0]
     
         possible_substats = list(SUB_STATS)
         weights = list(SUB_WEIGHT)
     
         if main_stat in possible_substats:
             idx = possible_substats.index(main_stat)
-            possible_substats.remove(idx)
-            weights.remove(idx)
+            possible_substats.pop(idx)
+            weights.pop(idx)
     
         if strongbox:
-            n_subs = random.choices((3,4), (66,34))
+            n_subs = random.choices((3,4), (66,34))[0]
         else:
-            n_subs = random.choices((3,4), (8,2))
+            n_subs = random.choices((3,4), (8,2))[0]
     
         sub_stats = random.choices(possible_substats, weights, k=n_subs)
         return main_stat, sub_stats
@@ -477,7 +478,7 @@ class Artifact():
 
     def __str__(self):
         set_piece_name = SET_PIECES[self.art_set][self.piece]
-        piece_name = PIECE_NAMES[piece]
+        piece_name = PIECE_NAMES[self.piece]
         s = f"**{self.art_set}**\n*{piece_name}:* {set_piece_name}\n"
         pct = '%' in self.main_stat or "bonus" in self.main_stat or self.main_stat in ("Energy Recharge", "Crit Rate", "Crit DMG")
         s += self.main_stat.replace(' %', '')
@@ -487,6 +488,7 @@ class Artifact():
             if pct: val = str(round(self.sub_values[idx], 1))
             else: val = str(int(round(self.sub_values[idx], 0)))
             s += '\n> ' + stat.replace(' %', '') + '+' + val + '%'*pct
+        return s
 
     @classmethod
     def decompress(cls, bstr):
@@ -525,7 +527,7 @@ class Artifact():
             new_art.sub_values[h[0]] += SUB_VALUES_BASE[new_art.sub_stats[h[0]]]*SUB_VALUES_PERCENTAGE[h[1]]
         return new_art
 
-    def compress(self`):
+    def compress(self):
         psls = ('flower', 'feather', 'sands', 'goblet', 'circlet')
         p = psls.index(self.piece)
 
@@ -555,10 +557,10 @@ def collectDomainArtifacts(domain=None):
         domain = random.choice(DOMAINS)
     idx = DOMAINS.index(domain)
 
-    N = random.choices((1,2), (0.935, 0.065))
+    N = random.choices((1,2), (0.935, 0.065))[0]
     artifacts = []
-    fodder4 = 2 + random.choices((0,1), (0.515,0.485))
-    fodder3 = 3 + random.choices((0,1), (0.45,0.55))
+    fodder4 = 2 + random.choices((0,1), (0.515,0.485))[0]
+    fodder3 = 3 + random.choices((0,1), (0.45,0.55))[0]
     exp = convertArtifactEXP(3)*fodder3 + convertArtifactEXP(4)*fodder4
     for i in range(N):
         art_set = random.choice(SETS[idx*2:2*idx+2])
