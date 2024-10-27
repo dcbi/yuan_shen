@@ -393,30 +393,6 @@ def convertArtifactEXP(stars, rank=0):
     enhanced = CUMULATIVE_EXP_REQUIRED
     exp = base[stars-3] + enhanced[rank]*4/5
 
-def generateStats(piece, strongbox=False):
-    if piece == "flower":
-        main_stat = "HP"
-    elif piece == "feather":
-        main_stat = "ATK"
-    else:
-        main_stat = random.choices(MAIN_STATS[piece], MAIN_DISTRIBUTION[piece])
-
-    possible_substats = list(SUB_STATS)
-    weights = list(SUB_WEIGHT)
-
-    if main_stat in possible_substats:
-        idx = possible_substats.index(main_stat)
-        possible_substats.remove(idx)
-        weights.remove(idx)
-
-    if strongbox:
-        n_subs = random.choices((3,4), (66,34))
-    else:
-        n_subs = random.choices((3,4), (8,2))
-
-    sub_stats = random.choices(possible_substats, weights, k=n_subs)
-    return main_stat, sub_stats
-
 class Artifact():
     def __init__(self, art_set, piece, main_stat, sub_stats):
         self.rank = 0
@@ -469,9 +445,34 @@ class Artifact():
         return True
 
     @staticmethod
-    def generateTemplate():
+    def generateStats(piece, strongbox=False):
+        if piece == "flower":
+            main_stat = "HP"
+        elif piece == "feather":
+            main_stat = "ATK"
+        else:
+            main_stat = random.choices(MAIN_STATS[piece], MAIN_DISTRIBUTION[piece])
+    
+        possible_substats = list(SUB_STATS)
+        weights = list(SUB_WEIGHT)
+    
+        if main_stat in possible_substats:
+            idx = possible_substats.index(main_stat)
+            possible_substats.remove(idx)
+            weights.remove(idx)
+    
+        if strongbox:
+            n_subs = random.choices((3,4), (66,34))
+        else:
+            n_subs = random.choices((3,4), (8,2))
+    
+        sub_stats = random.choices(possible_substats, weights, k=n_subs)
+        return main_stat, sub_stats
+
+    @classmethod
+    def generateTemplate(cls, strongbox=False):
         piece = random.choice(("flower", "feather", "sands", "goblet", "circlet"))
-        main_stat, sub_stats = generateStats(piece, strongbox)
+        main_stat, sub_stats = cls.generateStats(piece, strongbox)
         return piece, main_stat, sub_stats
 
     def __str__(self):
@@ -568,6 +569,6 @@ def collectDomainArtifacts(domain=None):
 def collectStrongboxArtifacts(art_set, N):
     artifacts = []
     for i in range(N):
-        piece, main_stat, sub_stats = Artifact.generateTemplate()
+        piece, main_stat, sub_stats = Artifact.generateTemplate(strongbox=True)
         artifacts.append(Artifact(art_set, piece, main_stat, sub_stats))
     return artifacts
