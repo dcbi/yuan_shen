@@ -295,7 +295,7 @@ SETS = [
     "Viridescent Venerer",
     'Archaic Petra',
     'Retracing Bolide',
-    'Thudersoother',
+    'Thundersoother',
     'Thundering Fury',
     'Crimson Witch of Flames',
     "Lavawalker",
@@ -381,7 +381,7 @@ SUB_VALUES_PERCENTAGE = (1.0, 0.9, 0.8, 0.7)
 CUMULATIVE_EXP_REQUIRED = (0, 16300, 44725, 87150, 153300, 270475)
 
 EMOJIS = {
-    "flower": ":cherry_blossom:",
+    "flower": ":lotus:",
     "feather": ":feather:",
     "sands": ":hourglass:",
     "goblet": ":wine_glass:",
@@ -505,7 +505,7 @@ class Artifact():
         piece_idx = ints[1] & 15
         rank_idx = (ints[1] & 240)>>4
         main_stat_idx = ints[2]
-        substat_idxs = ints[3:]
+        substat_idxs = list(ints[3:])
         if substat_idxs[-1] == -1:
             substat_idxs.pop(-1)
 
@@ -514,8 +514,8 @@ class Artifact():
         for hi in hist_ints:
             line_idx = hi & 15
             val_idx = (hi & 240)>>4
-            if stat_idx < 4:
-                history.append( ( stat_idx , val_idx ) )
+            if line_idx < 4:
+                history.append( ( line_idx , val_idx ) )
 
         piece = PIECE_TYPES[piece_idx]
         if piece_idx==0:
@@ -527,7 +527,7 @@ class Artifact():
         sub_stats = [SUB_STATS[i] for i in substat_idxs]
         new_art = cls(SETS[art_set_idx], piece, main_stat, sub_stats)
         new_art.rank = rank_idx
-        new_art.main_value = MAIN_VALUES[piece][rank_idx]
+        new_art.main_value = MAIN_VALUES[main_stat][rank_idx]
         new_art.history.clear()
         new_art.history = history
         new_art.sub_values = [0]*len(sub_stats)
@@ -557,8 +557,12 @@ class Artifact():
         for h in self.history:
             cbs += struct.pack('<B', h[0] + (h[1]<<4) )
 
-        if len(self.history) < 9:
-            cbs += struct.pack('<B', 15)
+        count = len(self.history)
+        while count < 9:
+            cbs += struct.pack('B', 15)
+            count += 1
+
+        return cbs
 
 def collectDomainArtifacts(domain=None):
     if domain is None:
