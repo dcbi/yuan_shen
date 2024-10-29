@@ -9,7 +9,6 @@ import sys
 # Aqua Simulacra
 # 4pc Shimenawa
 # melt team with Xiangling, Bennett, Zhongli
-# melt team with Xiangling, Xilonen, Zhongli
 
 CHARACTER_LEVEL = 90
 CHARACTER_BASE_ATK = 334.85
@@ -95,6 +94,7 @@ ELEMENTAL_MASTERY = [
 ]
 ENERGY_RECHARGE = [
 ]
+# do NOT include the base 5% crit rate
 CRIT_RATE = [
     20, # ganyu A4 passive talent
 ]
@@ -105,7 +105,6 @@ CRIT_DMG = [
 ]
 PERCENT_DMG_BONUS = [
     20, # aqua simulacra R1
-    46.6, # goblet main (goblet)
     50, # shimenawa 4pc bonus
     35, # archaic petra 4pc bonus
     #15, # geo resonance
@@ -113,10 +112,11 @@ PERCENT_DMG_BONUS = [
 ]
 ADDITIVE_DMG_BONUS = [
 ]
-# do NOT include the base 5% crit rate
 PERCENT_REACTION_BONUS = [
 ]
 BASE_DMG_MULTIPLIER = [
+]
+HEALING_BONUS = [
 ]
 
 ENEMY_LEVEL = 100
@@ -128,9 +128,9 @@ ENEMY_RESISTANCE -= 0.20 # Zhongli shield
 REACTION_TYPE = "cryo melt"
 REACTION_MULTIPLIER = {
     "pyro melt": 2,
-	"cryo melt": 1.5,
-	"hydro vape": 2,
-	"pyro vape": 1.5,
+    "cryo melt": 1.5,
+    "hydro vape": 2,
+    "pyro vape": 1.5,
     "swirl": 0.6,
     "overload": 2,
     "electro-charged": 1.2,
@@ -146,7 +146,7 @@ REACTION_MULTIPLIER = {
 
 
 LEVEL_MULTIPLIER = {"character": [], "enemy":[]}
-with open("level_multipliers.csv", 'r') as csvfile:
+with open("genshin_level_multiplier.csv", 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     for row in reader:
         LEVEL_MULTIPLIER["character"].append(float(row[2]))
@@ -178,6 +178,8 @@ for art in artifacts:
             CRIT_RATE.append(art[stat]),
         elif stat == "Crit DMG":
             CRIT_DMG.append(art[stat]),
+        elif stat == "% DMG BONUS":
+            PERCENT_DMG_BONUS.append(art[stat])
 
 level_character = CHARACTER_LEVEL
 hp_character = CHARACTER_BASE_HP * (1 + sum(PERCENT_HP)/100) + sum(FLAT_HP)
