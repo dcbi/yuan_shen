@@ -1,0 +1,128 @@
+{
+	"ENEMY LEVEL": 103,
+	"ENEMY BASE RESISTANCE": 10,
+
+	"CHARACTER LEVEL": 90,
+	"CHARACTER BASE ATK": 334.85,
+	"CHARACTER BASE DEF": 630.21,
+	"CHARACTER BASE HP": 9796.73,
+
+	"WEAPON BASE ATK": 542,
+
+	"SKILL MULTIPLIERS": {
+		"ATK": [
+			391.68
+		],
+		"DEF": [
+			0
+		],
+		"HP": [
+			0
+		]
+	},
+
+	"REACTION TYPE" : "cryo melt",
+
+	"ARTIFACTS" : {
+		"FLOWER": {
+			"HP": 4780,
+			"ATK %": 5.8,
+			"Elemental Mastery": 42,
+			"Crit Rate": 5.4,
+			"Crit DMG": 21.8
+		},
+		"FEATHER": {
+			"ATK": 311,
+			"DEF %": 13.1,
+			"ATK %": 4.7,
+			"Crit Rate": 11.3,
+			"Crit DMG": 14.0
+		},
+		"SANDS": {
+			"ATK %": 46.6,
+			"ATK": 18,
+			"DEF": 16,
+			"Crit Rate": 9.3,
+			"Crit DMG": 18.7
+		},
+		"GOBLET": {
+			"% DMG BONUS": 46.6,
+			"ATK": 14,
+			"ATK %": 14.6,
+			"Crit Rate": 10.5,
+			"HP %": 10.5
+		},
+		"CIRCLET": {
+			"Crit Rate": 31.1,
+			"ATK ": 33,
+			"ATK %": 5.8,
+			"DEF %": 13.9,
+			"Crit DMG": 21.0
+		}
+	},
+
+	"FLAT HP" : [
+		0
+	],
+
+	"FLAT ATK" : [
+		1038.84
+	],
+
+	"FLAT DEF" : [
+		0
+	],
+
+	"PERCENT HP" : [
+		16
+	],
+
+	"PERCENT ATK" : [
+		25,
+		20
+	],
+
+	"PERCENT DEF" : [
+		0
+	],
+
+	"ELEMENTAL MASTERY" : [
+		80
+	],
+
+	"ENERGY RECHARGE" : [
+		0
+	],
+
+	"CRIT RATE" : [
+		20
+	],
+
+	"CRIT DMG" : [
+		38.4,
+		88.2
+	],
+
+	"PERCENT DMG BONUS" : [
+		20,
+		35,
+		35
+	],
+
+	"ADDITIVE DMG BONUS" : [
+		0
+	],
+
+	"PERCENT REACTION BONUS" : [
+		0
+	],
+
+	"BASE DMG MULTIPLIER" : [
+		0
+	],
+
+	"RESISTANCE DEBUFFS": [
+		15,
+		20
+	]
+}
