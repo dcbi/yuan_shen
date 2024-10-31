@@ -1,9 +1,9 @@
 {
-	"ENEMY LEVEL": 100,
+	"ENEMY LEVEL": 103,
 	"ENEMY BASE RESISTANCE": 10,
 
 	"CHARACTER LEVEL": 90,
-    "CHARACTER BASE ATK": 334.85,
+	"CHARACTER BASE ATK": 334.85,
 	"CHARACTER BASE DEF": 630.21,
 	"CHARACTER BASE HP": 9796.73,
 
@@ -11,18 +11,19 @@
 
 	"SKILL MULTIPLIERS": {
 		"ATK": [
-		    392,
-			230
+			391.68
 		],
 		"DEF": [
-		    0
+			0
 		],
 		"HP": [
-		    0
+			0
 		]
 	},
 
-    "ARTIFACTS" : {
+	"REACTION TYPE" : "cryo melt",
+
+	"ARTIFACTS" : {
 		"FLOWER": {
 			"HP": 4780,
 			"ATK %": 10.5,
@@ -60,67 +61,69 @@
 		}
 	},
 
-    "FLAT HP" : [
-	    0
+	"FLAT HP" : [
+		0
 	],
 
-    "FLAT ATK" : [
-	    894.88
+	"FLAT ATK" : [
+		1038.84
 	],
 
-    "FLAT DEF" : [
-	    0
+	"FLAT DEF" : [
+		0
 	],
 
-    "PERCENT HP" : [
-	    16
+	"PERCENT HP" : [
+		16
 	],
 
-    "PERCENT ATK" : [
-	    18,
+	"PERCENT ATK" : [
+		18,
 		25,
 		20
 	],
 
-    "PERCENT DEF" : [
-	    0
-	],
-
-    "ELEMENTAL MASTERY" : [
-	    0
-	],
-
-    "Energy Recharge" : [
-	    0
-	],
-
-    "Crit Rate" : [
-	    20
-	],
-
-    "Crit DMG" : [
-	    38.4,
-		88.2
-	],
-
-    "ADDITIVE DMG BONUS" : [
-	    0
-	],
-
-    "PERCENT REACTION BONUS" : [
-	    0
-	],
-
-    "BASE DMG MULTIPLIER" : [
-	    0
-	],
-
-    "HEALING BONUS" : [
+	"PERCENT DEF" : [
 		0
 	],
 
-    "RESISTANCE DEBUFFS": [
-	    15,
+	"ELEMENTAL MASTERY" : [
+		0
+	],
+
+	"ENERGY RECHARGE" : [
+		0
+	],
+
+	"CRIT RATE" : [
+		20
+	],
+
+	"CRIT DMG" : [
+		38.4,
+		88.2
+	],
+
+	"PERCENT DMG BONUS" : [
+		20,
+		50,
+		35
+	],
+
+	"ADDITIVE DMG BONUS" : [
+		0
+	],
+
+	"PERCENT REACTION BONUS" : [
+		0
+	],
+
+	"BASE DMG MULTIPLIER" : [
+		0
+	],
+
+	"RESISTANCE DEBUFFS": [
+		15,
 		20
 	]
 }
